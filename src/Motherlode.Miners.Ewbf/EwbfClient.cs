@@ -19,7 +19,7 @@ namespace Motherlode.Miners.Ewbf
 
 		public Uri BaseUri { get; }
 
-		public async Task<GetStatResponse> GetStatistics()
+		public async Task<GetStatResponse> GetStatisticsAsync()
 		{
 			using (var client = new EwbfHttpClient())
 			{
