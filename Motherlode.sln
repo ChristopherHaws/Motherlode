@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motherlode.Web", "src\Motherlode.Web\Motherlode.Web.csproj", "{6CECA0F1-FE68-4600-9046-FBBCE893CFFB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Motherlode.Hardware.Graphics.Nvidia", "src\Motherlode.Hardware.Graphics.Nvidia\Motherlode.Hardware.Graphics.Nvidia.csproj", "{86DAE25D-43D9-4005-B952-C56918172C81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6CECA0F1-FE68-4600-9046-FBBCE893CFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CECA0F1-FE68-4600-9046-FBBCE893CFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CECA0F1-FE68-4600-9046-FBBCE893CFFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86DAE25D-43D9-4005-B952-C56918172C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DAE25D-43D9-4005-B952-C56918172C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DAE25D-43D9-4005-B952-C56918172C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DAE25D-43D9-4005-B952-C56918172C81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,5 +53,6 @@ Global
 		{ED6BF240-F980-40DE-872E-211F3F50D831} = {92298081-FD71-4F66-90A1-C8B2A0E3C19A}
 		{D166857B-482C-4092-894D-41F8184171A0} = {92298081-FD71-4F66-90A1-C8B2A0E3C19A}
 		{6CECA0F1-FE68-4600-9046-FBBCE893CFFB} = {92298081-FD71-4F66-90A1-C8B2A0E3C19A}
+		{86DAE25D-43D9-4005-B952-C56918172C81} = {92298081-FD71-4F66-90A1-C8B2A0E3C19A}
 	EndGlobalSection
 EndGlobal

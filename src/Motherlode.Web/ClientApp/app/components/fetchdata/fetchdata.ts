@@ -1,22 +1,44 @@
-import { HttpClient } from 'aurelia-fetch-client';
-import { inject } from 'aurelia-framework';
+import { HttpClient, json } from 'aurelia-fetch-client';
+import { autoinject } from 'aurelia-framework';
 
-@inject(HttpClient)
+import { MinerService, Miner } from '../../services/miner-service';
+import { GpuService, Gpu } from '../../services/gpu-service';
+
+@autoinject
 export class Fetchdata {
+	private http: HttpClient;
+	private minerService: MinerService;
+	private gpuService: GpuService;
+
 	public gpus: Gpu[];
+	public miners: Miner[];
 
-	constructor(http: HttpClient) {
-		http.fetch('/api/gpu')
-			.then(result => result.json() as Promise<Gpu[]>)
-			.then(data => {
-				this.gpus = data;
-			});
+	constructor(http: HttpClient, minerService: MinerService, gpuService: GpuService) {
+		this.http = http;
+		this.minerService = minerService;
+		this.gpuService = gpuService;
 	}
-}
 
-interface Gpu {
-	id: number;
-	temperatureC: number;
-	temperatureF: number;
-	name: string;
+	public async activate(params): Promise<void> {
+		this.miners = await this.minerService.getAll();
+		this.gpus = await this.gpuService.getAll();
+	}
+	
+	public async enable(gpu: Gpu): Promise<void> {
+		gpu.isEnabled = false;
+		
+		await this.gpuService.save(gpu);
+	}
+
+	public async disable(gpu: Gpu): Promise<void> {
+		gpu.isEnabled = true;
+		
+		await this.gpuService.save(gpu);
+	}
+
+	public async changeMiner(gpu: Gpu): Promise<void> {
+		console.log(gpu.minerName);
+
+		await this.gpuService.save(gpu);
+	}
 }

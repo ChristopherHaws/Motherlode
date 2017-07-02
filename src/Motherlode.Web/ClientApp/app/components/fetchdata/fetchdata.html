@@ -11,7 +11,9 @@
 				<th>Id</th>
 				<th>Name</th>
 				<th>Temp. (C)</th>
-				<th>Temp. (F)</th>
+				<!--<th>Temp. (F)</th>-->
+				<th>Miner</th>
+				<th>Enabled</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,7 +21,16 @@
 				<td>${ gpu.id }</td>
 				<td>${ gpu.name }</td>
 				<td>${ gpu.temperatureC }</td>
-				<td>${ gpu.temperatureF }</td>
+				<td>
+					<select id="miner" value.bind="gpu.minerName" change.delegate="changeMiner(gpu)">
+						<option repeat.for="miner of miners" model.bind="miner.name">${miner.name}</option>
+					</select>
+				</td>
+				<!--<td>${ gpu.temperatureF }</td>-->
+				<td>
+					<button if.bind="gpu.isEnabled" click.delegate="enable(gpu)">Enable</button>
+					<button if.bind="!gpu.isEnabled" click.delegate="disable(gpu)">Disable</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
