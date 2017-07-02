@@ -1,0 +1,26 @@
+<template>
+	<h1>GPU's</h1>
+
+	<p>This component demonstrates fetching data from the server.</p>
+
+	<p if.bind="!gpus"><em>Loading...</em></p>
+
+	<table if.bind="gpus" class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Temp. (C)</th>
+				<th>Temp. (F)</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr repeat.for="gpu of gpus">
+				<td>${ gpu.id }</td>
+				<td>${ gpu.name }</td>
+				<td>${ gpu.temperatureC }</td>
+				<td>${ gpu.temperatureF }</td>
+			</tr>
+		</tbody>
+	</table>
+</template>
