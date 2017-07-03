@@ -21,12 +21,12 @@ export class App {
 			nav: true,
 			title: 'Counter'
 		}, {
-			route: 'fetch-data',
-			name: 'fetchdata',
+			route: 'gpu-page',
+			name: 'gpupage',
 			settings: { icon: 'th-list' },
-			moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),
+			moduleId: PLATFORM.moduleName('../gpu-page/gpu-page'),
 			nav: true,
-			title: 'Fetch data'
+			title: 'GPU\'s'
 		}]);
 
 		this.router = router;

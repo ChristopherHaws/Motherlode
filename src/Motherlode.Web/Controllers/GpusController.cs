@@ -43,6 +43,13 @@ namespace Motherlode_Web.Controllers
 		[HttpGet()]
 		public IActionResult Get()
 		{
+			var rand = new Random();
+
+			foreach (var gpu in GPUs)
+			{
+				gpu.TemperatureC = rand.Next(55, 85);
+			}
+
 			return Ok(GPUs);
 		}
 

@@ -8,13 +8,8 @@ export class MinerService {
 	constructor(http: HttpClient) {
 		this.http = http;
 	}
-
-	public getAll(): Promise<Miner[]> {
-		return this.http.fetch('/api/miners')
-			.then(result => result.json() as Promise<Miner[]>);
-	}
-
-	public async getAll2(): Promise<Miner[]> {
+	
+	public async getAll(): Promise<Miner[]> {
 		let result = await this.http.fetch('/api/miners');
 
 		return result.json() as Promise<Miner[]>;
