@@ -21,12 +21,12 @@ export class App {
 			nav: true,
 			title: 'GPU\'s'
 		}, {
-			route: 'counter',
-			name: 'counter',
+			route: 'agents',
+			name: 'agents',
 			settings: { icon: 'education' },
-			moduleId: PLATFORM.moduleName('../counter/counter'),
+			moduleId: PLATFORM.moduleName('../agents/agents'),
 			nav: true,
-			title: 'Counter'
+			title: 'Agents'
 		}]);
 
 		this.router = router;
