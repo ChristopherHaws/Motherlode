@@ -21,6 +21,22 @@ export class GpuService {
 			body: json(gpu)
 		});
 	}
+
+	public async enable(gpu: Gpu): Promise<void> {
+		gpu.isEnabled = true;
+
+		await this.http.fetch(`/api/gpus/${gpu.id}/enable`, {
+			method: 'put'
+		});
+	}
+
+	public async disable(gpu: Gpu): Promise<void> {
+		gpu.isEnabled = false;
+
+		await this.http.fetch(`/api/gpus/${gpu.id}/disable`, {
+			method: 'put'
+		});
+	}
 }
 
 export interface Gpu {

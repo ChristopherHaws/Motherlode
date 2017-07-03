@@ -1,12 +1,17 @@
 using System;
+using System.Collections.Concurrent;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Motherlode.Common.Miners;
+using Motherlode.Miners.Ewbf;
 
 namespace Motherlode_Web.Controllers
 {
 	[Route("api/[controller]")]
 	public class GpusController : Controller
 	{
+		private static ConcurrentDictionary<Int32, IMiner> Miners = new ConcurrentDictionary<Int32, IMiner>();
+
 		private static Gpu[] GPUs = new Gpu[]
 		{
 			new Gpu
@@ -54,6 +59,57 @@ namespace Motherlode_Web.Controllers
 			GPUs[id] = gpu;
 
 			return Ok(gpu);
+		}
+
+		[HttpPut("{id}/enable")]
+		public IActionResult Enable(Int32 id)
+		{
+			var resource = GPUs.SingleOrDefault(x => x.Id == id);
+
+			if (resource == null)
+			{
+				return this.NotFound();
+			}
+			
+			resource.IsEnabled = true;
+
+			var miner = Miners.GetOrAdd(id, x =>
+			{
+				var log = new FileMinerLog($"C:\\Applications\\Motherlode\\logs\\Miners\\{id}.log");
+
+				return new EwbfMiner(log);
+			});
+
+			if (miner.IsRunning)
+			{
+				return this.BadRequest();
+			}
+
+			miner.Start();
+
+			return Ok();
+		}
+		
+		[HttpPut("{id}/disable")]
+		public IActionResult Disable(Int32 id)
+		{
+			var resource = GPUs.SingleOrDefault(x => x.Id == id);
+
+			if (resource == null)
+			{
+				return this.NotFound();
+			}
+
+			if (!Miners.TryGetValue(id, out var miner))
+			{
+				return this.NotFound();
+			}
+
+			miner.Stop();
+
+			resource.IsEnabled = false;
+			
+			return Ok();
 		}
 
 		public class Gpu

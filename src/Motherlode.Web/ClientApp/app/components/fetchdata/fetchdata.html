@@ -28,8 +28,8 @@
 				</td>
 				<!--<td>${ gpu.temperatureF }</td>-->
 				<td>
-					<button if.bind="gpu.isEnabled" click.delegate="enable(gpu)">Enable</button>
-					<button if.bind="!gpu.isEnabled" click.delegate="disable(gpu)">Disable</button>
+					<button if.bind="!gpu.isEnabled" click.delegate="enable(gpu)">Enable</button>
+					<button if.bind="gpu.isEnabled" click.delegate="disable(gpu)">Disable</button>
 				</td>
 			</tr>
 		</tbody>

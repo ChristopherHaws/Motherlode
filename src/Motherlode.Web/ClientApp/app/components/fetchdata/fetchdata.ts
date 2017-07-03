@@ -25,15 +25,11 @@ export class Fetchdata {
 	}
 	
 	public async enable(gpu: Gpu): Promise<void> {
-		gpu.isEnabled = false;
-		
-		await this.gpuService.save(gpu);
+		await this.gpuService.enable(gpu);
 	}
 
 	public async disable(gpu: Gpu): Promise<void> {
-		gpu.isEnabled = true;
-		
-		await this.gpuService.save(gpu);
+		await this.gpuService.disable(gpu);
 	}
 
 	public async changeMiner(gpu: Gpu): Promise<void> {
