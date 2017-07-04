@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Motherlode.Common.Miners;
 using Motherlode.Miners.Ewbf;
+using Motherlode.Miners.Ewbf.Configuration;
 
 namespace Motherlode_Web.Controllers
 {
@@ -84,7 +86,41 @@ namespace Motherlode_Web.Controllers
 			{
 				var log = new FileMinerLog($"C:\\Applications\\Motherlode\\logs\\Miners\\{id}.log");
 
-				return new EwbfMiner(log);
+				var config = new EwbfConfiguration
+				{
+					CudaDevices = new List<Device>
+					{
+						new Device
+						{
+							Id = 0,
+							Intensity = 64
+						}
+					},
+					TempuratureLimit = 80,
+					TempuratureScale = TempuratureScale.Celcius,
+					CalculatePowerEfficiency = true,
+					LogLevel = 1,
+					LogFile = "miner.log",
+					Servers = new List<StratumServer>
+					{
+						new StratumServer
+						{
+							Address = "us1-zcash.flypool.org",
+							Port = 3333,
+							Username = "t1KjwjJLHpnpSnfZdAULrc93NTi8AudtTAe.rig01",
+							Password = "x"
+						},
+						new StratumServer
+						{
+							Address = "equihash.usa.nicehash.com",
+							Port = 3357,
+							Username = "1J8Z7jLvbN5u616BfhAgBYMz5wgmhR2LpB.rig01",
+							Password = "x"
+						}
+					}
+				};
+
+				return new EwbfMiner(log, @"C:\Users\chaws\Desktop\Mining\ZEC\EWBF\0.3.4b 2", id.ToString(), config);
 			});
 
 			if (miner.IsRunning)
@@ -97,7 +133,7 @@ namespace Motherlode_Web.Controllers
 			return Ok();
 		}
 		
-		[HttpPut("{id}/disable")]
+		[HttpPut("{ id}/disable")]
 		public IActionResult Disable(Int32 id)
 		{
 			var resource = GPUs.SingleOrDefault(x => x.Id == id);
