@@ -9,69 +9,81 @@ using Motherlode.Miners.Ewbf.Configuration;
 
 namespace Motherlode_Web.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/rigs/{rigId:guid}/[controller]")]
 	public class GpusController : Controller
 	{
-		private static ConcurrentDictionary<Int32, IMiner> Miners = new ConcurrentDictionary<Int32, IMiner>();
+		private static ConcurrentDictionary<String, IMiner> Miners = new ConcurrentDictionary<String, IMiner>();
 
-		private static Gpu[] GPUs = new Gpu[]
+		private static List<RigGpu> GPUs = new List<RigGpu>
 		{
-			new Gpu
+			new RigGpu
 			{
-				Id = 0,
-				TemperatureC = 55,
+				Id = "0",
+				Temperature = 55,
 				Name = "GeForce GTX 980 Ti",
 				MinerName = "EWBF",
 				IsEnabled = false
 			},
-			new Gpu
+			new RigGpu
 			{
-				Id = 1,
-				TemperatureC = 80,
+				Id = "1",
+				Temperature = 80,
 				Name = "GeForce GTX 1080 Ti",
 				MinerName = "EWBF",
 				IsEnabled = false
 			},
-			new Gpu
+			new RigGpu
 			{
-				Id = 2,
-				TemperatureC = 78,
+				Id = "2",
+				Temperature = 78,
 				Name = "GeForce GTX 1070 OC",
 				MinerName = "EWBF",
 				IsEnabled = false
 			}
 		};
 
-		[HttpGet()]
+		[HttpGet("api/[controller]")]
 		public IActionResult Get()
 		{
 			var rand = new Random();
 
 			foreach (var gpu in GPUs)
 			{
-				gpu.TemperatureC = rand.Next(55, 85);
+				gpu.Temperature = rand.Next(55, 85);
+			}
+
+			return Ok(GPUs);
+		}
+		
+		public IActionResult GetForRig(Guid rigId)
+		{
+			var rand = new Random();
+
+			foreach (var gpu in GPUs)
+			{
+				gpu.Temperature = rand.Next(55, 85);
 			}
 
 			return Ok(GPUs);
 		}
 
 		[HttpPut("{id}")]
-		public IActionResult Put(Int32 id, [FromBody] Gpu gpu)
+		public IActionResult Put(Guid rigId, String id, [FromBody] RigGpu gpu)
 		{
-			var resource = GPUs.SingleOrDefault(x => x.Id == id);
-			
-			if (resource == null)
+			var index = GPUs.FindIndex(x => x.Id == id);
+
+			if (index < 0)
 			{
 				return this.NotFound();
 			}
-
-			GPUs[id] = gpu;
+			
+			GPUs[index] = gpu;
 
 			return Ok(gpu);
 		}
 
 		[HttpPut("{id}/enable")]
-		public IActionResult Enable(Int32 id)
+		public IActionResult Enable(Guid rigId, String id)
 		{
 			var resource = GPUs.SingleOrDefault(x => x.Id == id);
 
@@ -133,8 +145,8 @@ namespace Motherlode_Web.Controllers
 			return Ok();
 		}
 		
-		[HttpPut("{ id}/disable")]
-		public IActionResult Disable(Int32 id)
+		[HttpPut("{id}/disable")]
+		public IActionResult Disable(Guid rigId, String id)
 		{
 			var resource = GPUs.SingleOrDefault(x => x.Id == id);
 
@@ -155,17 +167,35 @@ namespace Motherlode_Web.Controllers
 			return Ok();
 		}
 
-		public class Gpu
+		public class RigGpu
 		{
-			public Int32 Id { get; set; }
+			public String Id { get; set; }
 
-			public Double TemperatureC { get; set; }
+			public String BusId { get; set; }
 
 			public String Name { get; set; }
 
-			public String MinerName { get; set; }
+			public Decimal HashRate { get; set; }
 
-			//public Double TemperatureF => 32 + (this.TemperatureC / 0.5556d);
+			public Decimal Temperature { get; set; }
+
+			public Decimal FanSpeed { get; set; }
+
+			public Decimal PowerUsage { get; set; }
+
+			public Decimal PowerLimit { get; set; }
+
+			public Decimal MaxPowerLimit { get; set; }
+
+			public Decimal CoreClock { get; set; }
+
+			public Decimal MaxCoreClock { get; set; }
+
+			public Decimal MemoryClock { get; set; }
+
+			public Decimal MaxMemoryClock { get; set; }
+
+			public String MinerName { get; set; }
 
 			public Boolean IsEnabled { get; set; }
 		}

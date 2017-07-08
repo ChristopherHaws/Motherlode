@@ -4,7 +4,7 @@ import { MinerService, Miner } from '../../services/miner-service';
 import { GpuService, Gpu } from '../../services/gpu-service';
 
 @autoinject
-export class GpuPage {
+export class RigView {
 	private minerService: MinerService;
 	private gpuService: GpuService;
 	private isRunning: boolean;

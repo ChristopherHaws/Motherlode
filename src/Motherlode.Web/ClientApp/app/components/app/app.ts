@@ -14,12 +14,12 @@ export class App {
 			nav: true,
 			title: 'Home'
 		}, {
-			route: 'gpu-page',
-			name: 'gpupage',
+			route: 'rigs',
+			name: 'rigs',
 			settings: { icon: 'th-list' },
-			moduleId: PLATFORM.moduleName('../gpu-page/gpu-page'),
+			moduleId: PLATFORM.moduleName('../rigs/rigs'),
 			nav: true,
-			title: 'GPU\'s'
+			title: 'Rigs'
 		}, {
 			route: 'agents',
 			name: 'agents',
