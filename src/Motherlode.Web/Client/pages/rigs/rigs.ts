@@ -19,9 +19,12 @@ export class RigView {
 	}
 
 	public async activate(params): Promise<void> {
-		this.rigs = await this.rigService.getAll();
-		this.miners = await this.minerService.getAll();
-		this.gpus = await this.gpuService.getAll();
+		await Promise.all([
+			(async () => this.rigs = await this.rigService.getAll())(),
+			(async () => this.miners = await this.minerService.getAll())(),
+			(async () => this.gpus = await this.gpuService.getAll())()
+		]);
+
 		this.run();
 	}
 	
@@ -44,15 +47,19 @@ export class RigView {
 	}
 
 	private run(): void {
-		this.isRunning = true;
+		if (this.isRunning) {
+			return;
+		}
 
-		setTimeout(async () => {
+		this.isRunning = true;
+		
+		let interval = setInterval(async () => {
 			if (!this.isRunning) {
+				clearInterval(interval);
 				return;
 			}
 
 			this.gpus = await this.gpuService.getAll();
-			this.run();
 		}, 3000);
 	}
 }
