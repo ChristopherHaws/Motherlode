@@ -1,21 +1,18 @@
 ﻿import { HttpClient, json } from 'aurelia-fetch-client';
 import { autoinject } from 'aurelia-framework';
+import { Rig } from './models';
 
 @autoinject
-export class MinerService {
+export class RigService {
 	private http: HttpClient;
 
 	constructor(http: HttpClient) {
 		this.http = http;
 	}
 	
-	public async getAll(): Promise<Miner[]> {
-		let result = await this.http.fetch('/api/miners');
+	public async getAll(): Promise<Rig[]> {
+		let result = await this.http.fetch('/api/rigs');
 
-		return result.json() as Promise<Miner[]>;
+		return await result.json() as Promise<Rig[]>;
 	}
-}
-
-export interface Miner {
-	name: string;
 }

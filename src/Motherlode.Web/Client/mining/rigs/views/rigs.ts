@@ -1,5 +1,7 @@
 import { autoinject } from 'aurelia-framework';
-import { GpuService, Gpu, MinerService, Miner, RigService, Rig } from '../../services';
+import { Miner, MinerService } from '../../miners';
+import { Gpu, GpuService } from '../../gpus';
+import { Rig, RigService } from '../';
 
 @autoinject
 export class RigView {

@@ -7,26 +7,12 @@ export class App {
 	configureRouter(config: RouterConfiguration, router: Router) {
 		config.title = 'Motherlode';
 		config.map([{
-			route: ['', 'home'],
-			name: 'home',
-			settings: { icon: 'home' },
-			moduleId: PLATFORM.moduleName('pages/home/home'),
-			nav: true,
-			title: 'Home'
-		}, {
-			route: 'rigs',
+			route: ['', 'rigs'],
 			name: 'rigs',
 			settings: { icon: 'th-list' },
-			moduleId: PLATFORM.moduleName('pages/rigs/rigs'),
+			moduleId: PLATFORM.moduleName('mining/rigs/views/rigs'),
 			nav: true,
 			title: 'Rigs'
-		}, {
-			route: 'agents',
-			name: 'agents',
-			settings: { icon: 'education' },
-			moduleId: PLATFORM.moduleName('pages/agents/agents'),
-			nav: true,
-			title: 'Agents'
 		}]);
 
 		this.router = router;

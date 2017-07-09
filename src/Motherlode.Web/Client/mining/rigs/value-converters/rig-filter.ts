@@ -1,4 +1,5 @@
-import { Gpu, Rig } from '../../../services';
+import { Rig } from '../models';
+import { Gpu } from '../../gpus';
 
 export class RigFilterValueConverter {
 	toView(gpus: Gpu[], rig: Rig) {

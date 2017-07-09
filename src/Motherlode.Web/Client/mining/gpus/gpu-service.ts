@@ -1,5 +1,6 @@
 ﻿import { HttpClient, json } from 'aurelia-fetch-client';
 import { autoinject } from 'aurelia-framework';
+import { Gpu } from './models';
 
 @autoinject
 export class GpuService {
@@ -37,13 +38,4 @@ export class GpuService {
 			method: 'put'
 		});
 	}
-}
-
-export interface Gpu {
-	id: number;
-	rigName: string;
-	temperature: number;
-	name: string;
-	minerName: string;
-	isEnabled: boolean;
 }
