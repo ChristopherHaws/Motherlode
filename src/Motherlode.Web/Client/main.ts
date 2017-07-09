@@ -8,7 +8,7 @@ export function configure(aurelia: Aurelia) {
 	aurelia.use
 		.standardConfiguration();
 		//.globalResources([
-		//	"resources/value-converters/filter-value-converter"
+		//	"./resources/value-converters/not-null"
 		//]);
 
 	if (IS_DEV_BUILD) {
