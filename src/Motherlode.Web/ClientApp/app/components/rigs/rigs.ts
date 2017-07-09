@@ -1,23 +1,25 @@
 import { autoinject } from 'aurelia-framework';
-
-import { MinerService, Miner } from '../../services/miner-service';
-import { GpuService, Gpu } from '../../services/gpu-service';
+import { GpuService, Gpu, MinerService, Miner, RigService, Rig } from '../../services';
 
 @autoinject
 export class RigView {
 	private minerService: MinerService;
 	private gpuService: GpuService;
+	private rigService: RigService;
 	private isRunning: boolean;
 
+	public rigs: Rig[];
 	public gpus: Gpu[];
 	public miners: Miner[];
 
-	constructor(minerService: MinerService, gpuService: GpuService) {
+	constructor(minerService: MinerService, gpuService: GpuService, rigService: RigService) {
 		this.minerService = minerService;
 		this.gpuService = gpuService;
+		this.rigService = rigService;
 	}
 
 	public async activate(params): Promise<void> {
+		this.rigs = await this.rigService.getAll();
 		this.miners = await this.minerService.getAll();
 		this.gpus = await this.gpuService.getAll();
 		this.run();
@@ -52,5 +54,15 @@ export class RigView {
 			this.gpus = await this.gpuService.getAll();
 			this.run();
 		}, 3000);
+	}
+}
+
+export class RigFilterValueConverter {
+	toView(gpus: Gpu[], rig: Rig) {
+		if (!gpus || !rig) {
+			return gpus;
+		}
+
+		return gpus.filter(gpu => gpu.rigName === rig.name);
 	}
 }

@@ -19,6 +19,7 @@ namespace Motherlode_Web.Controllers
 			new RigGpu
 			{
 				Id = "0",
+				RigName = "rig01",
 				Temperature = 55,
 				Name = "GeForce GTX 980 Ti",
 				MinerName = "EWBF",
@@ -27,6 +28,7 @@ namespace Motherlode_Web.Controllers
 			new RigGpu
 			{
 				Id = "1",
+				RigName = "rig01",
 				Temperature = 80,
 				Name = "GeForce GTX 1080 Ti",
 				MinerName = "EWBF",
@@ -35,6 +37,7 @@ namespace Motherlode_Web.Controllers
 			new RigGpu
 			{
 				Id = "2",
+				RigName = "rig02",
 				Temperature = 78,
 				Name = "GeForce GTX 1070 OC",
 				MinerName = "EWBF",
@@ -170,6 +173,8 @@ namespace Motherlode_Web.Controllers
 		public class RigGpu
 		{
 			public String Id { get; set; }
+
+			public String RigName { get; set; }
 
 			public String BusId { get; set; }
 

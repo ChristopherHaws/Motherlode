@@ -13,6 +13,11 @@ namespace Motherlode.Web.Controllers
 			{
 				Id = Guid.NewGuid(),
 				Name = "rig01"
+			},
+			new Rig
+			{
+				Id = Guid.NewGuid(),
+				Name = "rig02"
 			}
 		};
 
