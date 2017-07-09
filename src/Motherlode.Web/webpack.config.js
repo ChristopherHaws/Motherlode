@@ -10,7 +10,7 @@ module.exports = (env) => {
 		entry: { 'app': 'aurelia-bootstrapper' },
 		resolve: {
 			extensions: ['.ts', '.js'],
-			modules: ['ClientApp', 'node_modules'],
+			modules: ['Client', 'node_modules'],
 		},
 		output: {
 			path: path.resolve(bundleOutputDir),
@@ -19,7 +19,7 @@ module.exports = (env) => {
 		},
 		module: {
 			rules: [
-				{ test: /\.ts$/i, include: /ClientApp/, use: 'ts-loader?silent=true' },
+				{ test: /\.ts$/i, include: /Client/, use: 'ts-loader?silent=true' },
 				{ test: /\.html$/i, use: 'html-loader' },
 				{ test: /\.css$/i, use: isDevBuild ? 'css-loader' : 'css-loader?minimize' },
 				{ test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }

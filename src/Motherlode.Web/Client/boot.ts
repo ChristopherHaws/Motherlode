@@ -8,12 +8,12 @@ export function configure(aurelia: Aurelia) {
 	aurelia.use
 		.standardConfiguration();
 		//.globalResources([
-		//	"app/resources/value-converters/filter-value-converter"
+		//	"resources/value-converters/filter-value-converter"
 		//]);
 
 	if (IS_DEV_BUILD) {
 		aurelia.use.developmentLogging();
 	}
 
-	aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app/components/app/app')));
+	aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('components/app/app')));
 }
