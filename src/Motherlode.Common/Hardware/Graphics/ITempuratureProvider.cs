@@ -1,5 +1,4 @@
 ﻿using System;
-using Motherlode.Common.CommandQuery;
 
 namespace Motherlode.Common.Hardware.Graphics
 {
@@ -13,7 +12,7 @@ namespace Motherlode.Common.Hardware.Graphics
 		Decimal GetPowerUsage(Int32 gpuId);
 	}
 
-	public class GetHashRateQuery : IQuery<GetHashRateQuery.Result>
+	public class GetHashRateQuery
 	{
 		public Int32 GpuId { get; set; }
 
